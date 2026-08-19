@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaçoLilas — IHS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="bg-glow" aria-hidden="true"></div>
+
+<!-- ================= BOAS-VINDAS / PERFIL ================= -->
+<div class="welcome-overlay" id="welcomeOverlay">
+
+  <div class="welcome-card">
+
+    <div class="logo-container welcome-logo">
+      <img src="Logo.png" alt="Logo Laço Lilás">
+    </div>
+
+    <div class="brand-text" style="font-size:1.6rem;margin-bottom:4px;">Amparo</div>
+    <div class="brand-sub" style="margin-bottom:20px;">Você não está sozinha</div>
+
+    <p class="lead" style="max-width:44ch;margin:0 auto 26px;">
+      Antes de começar, escolha como quer usar o Amparo neste dispositivo.
+      Você pode mudar isso depois, a qualquer momento.
+    </p>
+
+    <div class="welcome-options" id="welcomeOptions">
+
+      <button class="welcome-opt" data-ripple id="optAccount">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+        </svg>
+        <div>
+          <h4>Criar um perfil</h4>
+          <p>Salva seu plano, contatos e dados apenas neste navegador, para encontrar tudo depois.</p>
+        </div>
+      </button>
+
+      <button class="welcome-opt" data-ripple id="optAnon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21a4 4 0 00-10 0"/>
+          <circle cx="12" cy="11" r="4"/>
+          <path d="M3 3l18 18" opacity="0.001"/>
+        </svg>
+        <div>
+          <h4>Continuar anônima(o)</h4>
+          <p>Nada é salvo. Ao fechar a aba, todos os dados digitados desaparecem.</p>
+        </div>
+      </button>
+
+    </div>
+
+    <div class="welcome-form" id="welcomeForm">
+
+      <div class="field">
+        <label>Como podemos te chamar? (pode ser um apelido)</label>
+        <input type="text" id="welcomeName" placeholder="Ex: Ana">
+      </div>
+
+      <div class="field">
+        <label>E-mail (opcional)</label>
+        <input type="email" id="welcomeEmail" placeholder="opcional">
+      </div>
+
+      <div class="field">
+        <label>Uma senha simples, só para você (opcional)</label>
+        <input type="password" id="welcomePass" placeholder="opcional">
+      </div>
+
+      <div class="welcome-warning">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>
+        </svg>
+        <span>Isso fica salvo só neste navegador, e não em nenhum servidor. Se este é um dispositivo compartilhado ou monitorado, prefira "Continuar anônima(o)" e use sempre o botão de Sair rápido.</span>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:6px;">
+        <button class="btn-primary" data-ripple id="confirmAccount">Salvar e continuar</button>
+        <button class="btn-ghost" data-ripple id="backToOptions">Voltar</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="app">
+
+  <!-- ================= SIDEBAR ================= -->
+
+  <aside class="sidebar">
+
+    <!-- LOGO -->
+    <div class="brand">
+
+      <div class="logo-container">
+        <img 
+          src="Logo.png" 
+          alt="Logo Laço Lilás"
+        >
+      </div>
+
+      <div>
+        <div class="brand-text">Laço Lilás</div>
+        <div class="brand-sub">Você não está sozinha</div>
+      </div>
+
+    </div>
+
+    <!-- PERFIL ATUAL -->
+    <div class="profile-badge" id="profileBadge">
+      <div class="profile-avatar" id="profileAvatar">?</div>
+      <div class="profile-info">
+        <div class="profile-name" id="profileName">Anônima(o)</div>
+        <button class="profile-switch" id="profileSwitch">Trocar modo</button>
+      </div>
+    </div>
+
+
+    <!-- NAVEGAÇÃO -->
+
+    <nav class="mainnav" id="mainnav">
+
+      <button class="navbtn active" data-screen="inicio">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <path d="M3 11l9-8 9 8"/>
+          <path d="M5 10v10h14V10"/>
+        </svg>
+        <span>Início</span>
+      </button>
+
+
+      <button class="navbtn" data-screen="info">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8h.01M11 12h1v5h1"/>
+        </svg>
+        <span>Sinais e informação</span>
+      </button>
+
+
+      <button class="navbtn" data-screen="avaliacao">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <path d="M9 11l3 3L22 4"/>
+          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        </svg>
+        <span>Autoavaliação</span>
+      </button>
+
+
+      <button class="navbtn" data-screen="rede">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <circle cx="6" cy="6" r="3"/>
+          <circle cx="18" cy="6" r="3"/>
+          <circle cx="12" cy="18" r="3"/>
+          <path d="M6 9v2a3 3 0 003 3h1M18 9v2a3 3 0 01-3 3h-1"/>
+        </svg>
+        <span>Rede de apoio</span>
+      </button>
+
+
+      <button class="navbtn" data-screen="pontos">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <span>Pontos de segurança</span>
+      </button>
+
+
+      <button class="navbtn" data-screen="contatos">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+        <span>Contatos de confiança</span>
+      </button>
+
+
+      <button class="navbtn" data-screen="plano">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <path d="M9 12l2 2 4-4"/>
+          <rect x="3" y="4" width="18" height="17" rx="2"/>
+          <path d="M3 9h18"/>
+        </svg>
+        <span>Plano de segurança</span>
+      </button>
+
+
+      <button class="navbtn" data-screen="orientacoes">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+        </svg>
+        <span>Orientações</span>
+      </button>
+
+      <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
+
+    </nav>
+
+
+    <!-- SAÍDA RÁPIDA -->
+
+    <div class="exit-wrap">
+
+      <button class="exit-btn" id="quickExit">
+
+        <svg width="16" height="16" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2">
+
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+          <path d="M16 17l5-5-5-5"/>
+          <path d="M21 12H9"/>
+
+        </svg>
+
+        Sair rápido
+
+      </button>
+
+      <div class="exit-note">
+        Se alguém está por perto, este botão leva você para um site neutro imediatamente.
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- ================= MAIN ================= -->
+
+  <main>
+
+    <div class="topbar">
+
+      <div class="disclaimer-pill">
+
+        <svg width="14" height="14" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2">
+
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8v5M12 16h.01"/>
+
+        </svg>
+
+        Protótipo acadêmico — não substitui serviços oficiais
+
+      </div>
+
+      <div class="emergency-pill">
+        Emergência: 190 · Ligue 180
+      </div>
+
+    </div>
+
+
+    <!-- ================= INÍCIO ================= -->
+
+    <section class="screen active" id="screen-inicio">
+
+      <div class="hero">
+
+        <svg class="arc" width="260" height="260"
+          viewBox="0 0 260 260" fill="none">
+
+          <path
+            d="M20 200A160 160 0 01180 30"
+            stroke="url(#g2)"
+            stroke-width="2"
+            opacity="0.6"
+          />
+
+          <path
+            d="M50 220A130 130 0 01210 60"
+            stroke="url(#g2)"
+            stroke-width="2"
+            opacity="0.4"
+          />
+
+          <circle
+            cx="200"
+            cy="45"
+            r="10"
+            fill="#C89BFA"
+          />
+
+          <defs>
+
+            <linearGradient
+              id="g2"
+              x1="0"
+              y1="260"
+              x2="260"
+              y2="0"
+            >
+
+              <stop stop-color="#8B3FE0"/>
+              <stop offset="1" stop-color="#C89BFA"/>
+
+            </linearGradient>
+
+          </defs>
+
+        </svg>
+
+
+        <div class="eyebrow" style="color:var(--lilac-soft)" id="heroGreeting">
+          Agosto Lilás · prevenção ao feminicídio
+        </div>
+
+        <h1>
+          Informação, escuta e caminho para a rede certa.
+        </h1>
+
+        <p class="lead">
+          O Amparo ajuda a reconhecer sinais de violência,
+          organizar um plano de segurança e encontrar, com clareza,
+          os serviços oficiais que podem ajudar de verdade.
+        </p>
+
+
+        <div class="hero-actions">
+
+          <button
+            class="btn-primary"
+            data-ripple
+            onclick="showScreen('avaliacao')"
+          >
+            Fazer autoavaliação
+          </button>
+
+          <button
+            class="btn-ghost"
+            data-ripple
+            onclick="showScreen('rede')"
+          >
+            Ver rede de apoio
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="quickgrid">
+
+        <button
+          class="qcard"
+          data-tilt
+          onclick="showScreen('info')"
+        >
+
+          <svg width="22" height="22" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2">
+
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 8h.01M11 12h1v5h1"/>
+
+          </svg>
+
+          <h3>Reconhecer sinais</h3>
+
+          <p>
+            Entenda padrões de controle, ameaça e abuso — nem sempre físicos.
+          </p>
+
+        </button>
+
+
+        <button
+          class="qcard"
+          data-tilt
+          onclick="showScreen('plano')"
+        >
+
+          <svg width="22" height="22" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2">
+
+            <path d="M9 12l2 2 4-4"/>
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M3 9h18"/>
+
+          </svg>
+
+          <h3>Montar plano de segurança</h3>
+
+          <p>
+            Um checklist simples para se preparar antes de precisar sair.
+          </p>
+
+        </button>
+
+
+        <button
+          class="qcard"
+          data-tilt
+          onclick="showScreen('pontos')"
+        >
+
+          <svg width="22" height="22" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2">
+
+            <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+
+          </svg>
+
+          <h3>Encontrar pontos de segurança</h3>
+
+          <p>
+            Delegacias, hospitais e pontos de acolhimento perto de você.
+          </p>
+
+        </button>
+
+      </div>
+
+
+      <div class="note-box">
+
+        <svg width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          style="flex-shrink:0;color:var(--lilac)">
+
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8v5M12 16h.01"/>
+
+        </svg>
+
+        <div>
+
+          <strong>Este é um projeto acadêmico</strong>
+          desenvolvido para a disciplina de Modelagem de Sistemas.
+          Ele tem caráter educativo e não substitui atendimento policial,
+          jurídico, psicológico ou qualquer serviço oficial de emergência.
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= INFORMAÇÃO ================= -->
+
+    <section class="screen" id="screen-info">
+
+      <div class="eyebrow">
+        Informação
+      </div>
+
+      <h2>
+        Sinais que merecem atenção
+      </h2>
+
+      <p class="lead">
+        A violência doméstica raramente começa com agressão física.
+        Ela costuma se instalar aos poucos, por meio de controle e isolamento.
+        Reconhecer o padrão é o primeiro passo.
+      </p>
+
+
+      <div class="sign-grid">
+
+        <div class="sign-card" data-tilt>
+          <span class="tag">Controle</span>
+          <h3>Vigilância constante</h3>
+          <p>
+            Checar celular, exigir satisfações sobre horários,
+            controlar roupas ou quem você vê.
+          </p>
+        </div>
+
+
+        <div class="sign-card" data-tilt>
+          <span class="tag">Isolamento</span>
+          <h3>Afastamento de rede de apoio</h3>
+          <p>
+            Dificultar contato com amigos e família,
+            criar conflitos que te afastam de quem te apoia.
+          </p>
+        </div>
+
+
+        <div class="sign-card" data-tilt>
+          <span class="tag">Psicológica</span>
+          <h3>Humilhação e desqualificação</h3>
+          <p>
+            Críticas constantes, comentários que abalam a autoestima,
+            culpabilização recorrente.
+          </p>
+        </div>
+
+
+        <div class="sign-card" data-tilt>
+          <span class="tag">Financeira</span>
+          <h3>Controle de recursos</h3>
+          <p>
+            Impedir acesso a dinheiro próprio, controlar gastos,
+            dificultar o trabalho fora de casa.
+          </p>
+        </div>
+
+
+        <div class="sign-card" data-tilt>
+          <span class="tag">Ameaça</span>
+          <h3>Intimidação</h3>
+          <p>
+            Ameaças diretas ou veladas, destruição de objetos,
+            uso do medo como forma de controle.
+          </p>
+        </div>
+
+
+        <div class="sign-card" data-tilt>
+          <span class="tag">Digital</span>
+          <h3>Monitoramento online</h3>
+          <p>
+            Exigir senhas, instalar aplicativos de rastreamento,
+            controlar redes sociais.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="note-box">
+
+        <svg width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          style="flex-shrink:0;color:var(--lilac)">
+
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8v5M12 16h.01"/>
+
+        </svg>
+
+        <div>
+
+          A presença de um ou mais sinais não é um diagnóstico —
+          é um convite à atenção.
+
+          Se algo aqui soa familiar, considere conversar com a
+
+          <a
+            href="#"
+            onclick="showScreen('rede');return false;"
+            style="color:var(--lilac-soft);font-weight:600;"
+          >
+            rede de apoio
+          </a>.
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= AUTOAVALIAÇÃO ================= -->
+
+    <section class="screen" id="screen-avaliacao">
+
+      <div class="eyebrow">
+        Educativo · não é um diagnóstico
+      </div>
+
+      <h2>
+        Autoavaliação de risco
+      </h2>
+
+      <p class="lead">
+        Responda com sinceridade. O resultado é apenas educativo,
+        pensado para ajudar a refletir — não substitui uma avaliação profissional.
+      </p>
+
+      <div id="quizList"></div>
+
+
+      <div class="result-box" id="resultBox">
+
+        <h3 id="resultTitle">
+          Resultado
+        </h3>
+
+        <div class="result-bar">
+          <div class="result-fill" id="resultFill"></div>
+        </div>
+
+        <p
+          id="resultText"
+          style="color:#E6D9F7;"
+        ></p>
+
+        <button
+          class="btn-primary"
+          data-ripple
+          onclick="showScreen('rede')"
+        >
+          Ver rede de apoio
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= REDE DE APOIO ================= -->
+
+    <section class="screen" id="screen-rede">
+
+      <div class="eyebrow">
+        Serviços oficiais
+      </div>
+
+      <h2>
+        Rede de apoio
+      </h2>
+
+      <p class="lead">
+        Canais reais e gratuitos, disponíveis no Brasil.
+        Em caso de perigo imediato, ligue para a polícia.
+      </p>
+
+
+      <div class="support-list">
+
+        <div class="support-item">
+
+          <div>
+            <h3>Central de Atendimento à Mulher</h3>
+            <p>
+              Orientação, denúncia e encaminhamento — 24h, todos os dias.
+            </p>
+          </div>
+
+          <div class="support-num">180</div>
+
+        </div>
+
+
+        <div class="support-item">
+
+          <div>
+            <h3>Polícia Militar — Emergência</h3>
+            <p>
+              Perigo imediato à vida.
+            </p>
+          </div>
+
+          <div class="support-num">190</div>
+
+        </div>
+
+
+        <div class="support-item">
+
+          <div>
+            <h3>Disque Direitos Humanos</h3>
+            <p>
+              Denúncias de violações de direitos humanos.
+            </p>
+          </div>
+
+          <div class="support-num">100</div>
+
+        </div>
+
+
+        <div class="support-item">
+
+          <div>
+            <h3>Delegacia da Mulher (DEAM)</h3>
+            <p>
+              Atendimento especializado e registro de boletim de ocorrência.
+            </p>
+          </div>
+
+          <div class="support-num">→</div>
+
+        </div>
+
+
+        <div class="support-item">
+
+          <div>
+            <h3>Casa da Mulher Brasileira</h3>
+            <p>
+              Atendimento integrado: acolhimento,
+              apoio psicossocial e jurídico.
+            </p>
+          </div>
+
+          <div class="support-num">→</div>
+
+        </div>
+
+
+        <div class="support-item">
+
+          <div>
+            <h3>Defensoria Pública</h3>
+            <p>
+              Orientação jurídica gratuita, incluindo medidas protetivas.
+            </p>
+          </div>
+
+          <div class="support-num">→</div>
+
+        </div>
+
+      </div>
+
+
+      <div class="note-box">
+
+        <svg width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          style="flex-shrink:0;color:var(--lilac)">
+
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8v5M12 16h.01"/>
+
+        </svg>
+
+        <div>
+          Os números acima são canais oficiais brasileiros.
+          Este protótipo apenas os reúne para fins educativos —
+          o atendimento é sempre feito pelo órgão oficial.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PONTOS DE SEGURANÇA ================= -->
+
+    <section class="screen" id="screen-pontos">
+
+      <div class="eyebrow">
+        Perto de você
+      </div>
+
+      <h2>
+        Pontos de segurança próximos
+      </h2>
+
+      <p class="lead">
+        Encontre no mapa a delegacia, o hospital ou o ponto de acolhimento
+        mais próximo de onde você está agora.
+      </p>
+
+      <div class="location-box">
+
+        <button class="btn-primary" data-ripple id="useLocationBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-3px;margin-right:6px;">
+            <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Usar minha localização
+        </button>
+
+        <div class="location-or">ou</div>
+
+        <div class="field" style="flex:1;">
+          <input type="text" id="manualLocation" placeholder="Digite uma cidade ou endereço">
+        </div>
+
+        <button class="btn-ghost" data-ripple id="useManualBtn">Buscar</button>
+
+      </div>
+
+      <div class="location-status" id="locationStatus"></div>
+
+      <div class="points-grid" id="pointsGrid">
+
+        <div class="point-card" data-query="Delegacia da Mulher">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/>
+          </svg>
+          <h3>Delegacia da Mulher (DEAM)</h3>
+          <p>Atendimento especializado para registrar ocorrência e pedir medida protetiva.</p>
+          <span class="point-link">Abrir no mapa →</span>
+        </div>
+
+        <div class="point-card" data-query="Delegacia de Polícia">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          <h3>Delegacia de Polícia mais próxima</h3>
+          <p>Caso não haja DEAM na região, qualquer delegacia pode registrar o boletim.</p>
+          <span class="point-link">Abrir no mapa →</span>
+        </div>
+
+        <div class="point-card" data-query="Hospital">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4.5 8-11a8 8 0 10-16 0c0 6.5 8 11 8 11z"/><path d="M12 8v6M9 11h6"/>
+          </svg>
+          <h3>Hospital ou UPA</h3>
+          <p>Atendimento médico de urgência e emissão de laudos, se necessário.</p>
+          <span class="point-link">Abrir no mapa →</span>
+        </div>
+
+        <div class="point-card" data-query="Casa da Mulher Brasileira">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 10l9-7 9 7"/><path d="M5 9v11h14V9"/>
+          </svg>
+          <h3>Casa da Mulher Brasileira</h3>
+          <p>Acolhimento, apoio psicossocial e orientação jurídica em um só lugar.</p>
+          <span class="point-link">Abrir no mapa →</span>
+        </div>
+
+        <div class="point-card" data-query="CRAS Centro de Referência de Assistência Social">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 016-6h4a6 6 0 016 6v2"/>
+          </svg>
+          <h3>CRAS / CREAS</h3>
+          <p>Assistência social, acolhimento e encaminhamento para outros serviços.</p>
+          <span class="point-link">Abrir no mapa →</span>
+        </div>
+
+        <div class="point-card" data-query="Defensoria Pública">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+          </svg>
+          <h3>Defensoria Pública</h3>
+          <p>Orientação jurídica gratuita para medidas protetivas e processos.</p>
+          <span class="point-link">Abrir no mapa →</span>
+        </div>
+
+      </div>
+
+      <div class="note-box">
+
+        <svg width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          style="flex-shrink:0;color:var(--lilac)">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8v5M12 16h.01"/>
+        </svg>
+
+        <div>
+          Sua localização é usada apenas neste navegador para montar o link do mapa —
+          ela não é enviada nem guardada pelo Amparo. Os resultados abrem em uma nova aba, no Google Maps.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CONTATOS ================= -->
+
+    <section class="screen" id="screen-contatos">
+
+      <div class="eyebrow">
+        Sua rede pessoal
+      </div>
+
+      <h2>
+        Contatos de confiança
+      </h2>
+
+      <p class="lead" id="contactsLead">
+        Cadastre pessoas que podem ser acionadas rapidamente.
+        Neste protótipo, os dados ficam apenas na sessão atual do navegador.
+      </p>
+
+
+      <div class="form-row">
+
+        <div class="field">
+
+          <label>Nome</label>
+
+          <input
+            type="text"
+            id="cName"
+            placeholder="Ex: Camila Souza"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Telefone</label>
+
+          <input
+            type="text"
+            id="cPhone"
+            placeholder="Ex: (11) 99999-0000"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="field">
+
+          <label>Relação</label>
+
+          <select id="cRel">
+
+            <option>Amiga(o)</option>
+            <option>Familiar</option>
+            <option>Vizinha(o)</option>
+            <option>Colega de trabalho</option>
+            <option>Profissional</option>
+
+          </select>
+
+        </div>
+
+
+        <div
+          class="field"
+          style="align-self:end;"
+        >
+
+          <button
+            class="btn-add"
+            data-ripple
+            onclick="addContact()"
+          >
+            Adicionar contato
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="contact-list"
+        id="contactList"
+      ></div>
+
+    </section>
+
+
+    <!-- ================= PLANO ================= -->
+
+    <section class="screen" id="screen-plano">
+
+      <div class="eyebrow">
+        Preparação
+      </div>
+
+      <h2>
+        Plano de segurança
+      </h2>
+
+      <p class="lead">
+        Marque o que já está pronto.
+        Um plano organizado antes de uma crise facilita decisões rápidas
+        em um momento difícil.
+      </p>
+
+
+      <div class="progress-wrap">
+
+        <div class="progress-track">
+
+          <div
+            class="progress-fill"
+            id="planFill"
+          ></div>
+
+        </div>
+
+        <div
+          class="progress-label"
+          id="planLabel"
+        >
+          0 de 6 concluídos
+        </div>
+
+      </div>
+
+
+      <div
+        class="plan-list"
+        id="planList"
+      ></div>
+
+    </section>
+
+
+    <!-- ================= ORIENTAÇÕES ================= -->
+
+    <section class="screen" id="screen-orientacoes">
+
+      <div class="eyebrow">
+        Passo a passo
+      </div>
+
+      <h2>
+        O que fazer a partir daqui
+      </h2>
+
+      <p class="lead">
+        Não existe uma ordem obrigatória — cada situação é única.
+        Estes passos servem como ponto de partida.
+      </p>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-num"></div>
+
+          <div>
+
+            <h4>
+              Reconheça, sem culpa
+            </h4>
+
+            <p>
+              Identificar um padrão de violência não é fraqueza.
+              É o primeiro passo para buscar segurança.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num"></div>
+
+          <div>
+
+            <h4>
+              Converse com alguém de confiança
+            </h4>
+
+            <p>
+              Compartilhar o que está acontecendo reduz o isolamento
+              e amplia sua rede de apoio.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num"></div>
+
+          <div>
+
+            <h4>
+              Ligue 180 para orientação
+            </h4>
+
+            <p>
+              A Central de Atendimento à Mulher orienta sobre direitos,
+              medidas protetivas e próximos passos.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num"></div>
+
+          <div>
+
+            <h4>
+              Organize documentos e itens essenciais
+            </h4>
+
+            <p>
+              Documentos pessoais, cópias, dinheiro reservado
+              e itens de necessidade imediata, se possível.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num"></div>
+
+          <div>
+
+            <h4>
+              Registre boletim de ocorrência, se sentir seguro
+            </h4>
+
+            <p>
+              A Delegacia da Mulher pode orientar sobre
+              medidas protetivas de urgência.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num"></div>
+
+          <div>
+
+            <h4>
+              Busque apoio psicológico
+            </h4>
+
+            <p>
+              CREAS, Casa da Mulher Brasileira e serviços de saúde
+              oferecem acompanhamento especializado.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= RODAPÉ ================= -->
+
+    <footer class="app-footer">
+
+      Amparo — protótipo acadêmico da disciplina de Modelagem de Sistemas.
+      Não substitui serviços oficiais de emergência, denúncia ou atendimento especializado
+      - Isaias | Hanna | Sayslla
+
+    </footer>
+
+  </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
